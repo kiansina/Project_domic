@@ -52,6 +52,7 @@ cursor = conn.cursor()
 cursor.execute(sql)
 #nind=cursor.fetchall()
 df=pd.DataFrame(cursor.fetchall(),columns=cols)
+df.set_index('id',inplace=True)
 
 
 
