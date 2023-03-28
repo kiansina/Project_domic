@@ -110,4 +110,9 @@ if check_password():
     e_df = st.experimental_data_editor(df[xx], num_rows="dynamic")
     if st.button('Confirm'):
         dx=pd.DataFrame(e_df)
-        st.write(dx)
+        for i in dx.index:
+            sql="""update domiciliatario
+                   set {}={}
+                   where index={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
+            cursor = conn.cursor()
+            cursor.execute(sql)
