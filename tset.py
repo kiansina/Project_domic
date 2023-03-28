@@ -32,7 +32,7 @@ hide_menu_style= """
           <style>
             thead tr th:first-child {display:none}
             tbody th {display:none}
-            </style>
+          </style>
           """
 
 
