@@ -52,10 +52,7 @@ cursor.execute(sql)
 #nind=cursor.fetchall()
 df=pd.DataFrame(cursor.fetchall(),columns=cols)
 
-sql = """select * from v_user where stato=1 order by index"""
-cursor = conn.cursor()
-cursor.execute(sql)
-df=pd.DataFrame(cursor.fetchall(),columns=['ID','User', 'nome',	'Team',	'Qualifica', 'Tariffa', 'stato'])
+
 
 
 
