@@ -104,5 +104,5 @@ if check_password():
     #else:
     #    st.session_state["aut"] = 'sup'
 
-    st.write(df)
+    st.write(st.session_state["username"])
     e_df = st.experimental_data_editor(df, num_rows="dynamic")
