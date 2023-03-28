@@ -28,10 +28,8 @@ hide_menu_style= """
           <style>
           #MainMenu {visibility: hidden; }
           footer {visibility: hidden;}
-          </style>
-          <style>
-            thead tr th:first-child {display:none}
-            tbody th {display:none}
+          thead tr th:first-child {display:none}
+          tbody th {display:none}
           </style>
           """
 
