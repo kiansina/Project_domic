@@ -56,7 +56,28 @@ df.set_index('id',inplace=True)
 
 
 
-
+def to_excel3(df,index=False):
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    df.to_excel(writer, index=index, sheet_name='Sheet1', startrow=1, header=False)
+    workbook = writer.book
+    worksheet = writer.sheets['Sheet1']
+    cell_format = workbook.add_format()
+    cell_format.set_align('center')
+    cell_format.set_align('vcenter')
+    worksheet.set_column('A:ZZ', 25,cell_format)
+    header_format = workbook.add_format({
+    'bold': True,
+    'text_wrap': True,
+    'valign': 'vdistributed',
+    'align' : 'center',
+    'fg_color': '#A5F5B0'})#,
+    for col_num, value in enumerate(df.reset_index().columns.values):
+        worksheet.write(0, col_num, value, header_format)
+    worksheet.set_column('A:ZZ', 25)
+    writer.save()
+    processed_data = output.getvalue()
+    return processed_data
 
 
 
@@ -118,3 +139,13 @@ if check_password():
                    where id={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
             cursor = conn.cursor()
             cursor.execute(sql)
+
+     if st.button('extract voto'):
+          final_file = to_excel3(st.session_state['DP3'],index=True)
+          st.download_button(
+          "Press to Download",
+          final_file,
+          "Pivot_UP_{}.xlsx".format(d.strftime("%m_%d_%y")),
+          "text/csv",
+          key='download-excel'
+          )
