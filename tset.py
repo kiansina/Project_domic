@@ -107,5 +107,4 @@ if check_password():
     
           
     xx=['domiciliatario', 'rating_base']+[st.session_state["username"].lower()]
-    st.write(df[xx])
-    e_df = st.experimental_data_editor(df, num_rows="dynamic")
+    e_df = st.experimental_data_editor(df[xx], num_rows="dynamic")
