@@ -140,12 +140,12 @@ if check_password():
             cursor = conn.cursor()
             cursor.execute(sql)
 
-     if st.button('extract voto'):
-          final_file = to_excel3(st.session_state['DP3'],index=True)
-          st.download_button(
-          "Press to Download",
-          final_file,
-          "Pivot_UP_{}.xlsx".format(d.strftime("%m_%d_%y")),
-          "text/csv",
-          key='download-excel'
-          )
+    if st.button('extract voto'):
+        final_file = to_excel3(st.session_state['DP3'],index=True)
+        st.download_button(
+        "Press to Download",
+        final_file,
+        "Pivot_UP_{}.xlsx".format(d.strftime("%m_%d_%y")),
+        "text/csv",
+        key='download-excel'
+        )
