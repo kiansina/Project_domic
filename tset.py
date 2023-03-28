@@ -141,7 +141,7 @@ if check_password():
             cursor.execute(sql)
 
     if st.button('extract voto'):
-        final_file = to_excel3(st.session_state['DP3'],index=True)
+        final_file = to_excel3(df,index=True)
         st.download_button(
         "Press to Download",
         final_file,
