@@ -113,6 +113,6 @@ if check_password():
         for i in dx.index:
             sql="""update domiciliatario
                    set {}={}
-                   where index={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
+                   where id={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
             cursor = conn.cursor()
             cursor.execute(sql)
