@@ -44,6 +44,25 @@ conn = init_connection()
 
 conn.autocommit = True
 
+cols=['id', 'domiciliatario','alessandro_marcadelli', 'alice_giubbi', 'andrea_manduchi', 'andrea_siena', 'andrea_unfer', 'angela_romano', 'anna_pettenati', 'antonio_scalera', 'antonio_schiavone', 'antonio_toscano', 'barbara_zagaria', 'benedetta_cinti', 'benedetta_paniconi', 'chiara_butta', 'danilo_brandi', 'dario_mami', 'davide_sarina', 'diandra_sciarra', 'edoardo_salmaso', 'egzona_baxhak', 'eleonora_gioia', 'elisa_albanese', 'ester_famao', 'eva_baldassarre', 'federica_cirelli', 'federica_colombo', 'federica_de_carlo', 'federica_morandotti', 'filippo_maria_traina', 'filippo_porta', 'gaia_prudente', 'giangiacomo_ciceri', 'gianmarco_marani', 'ludovica_ferri', 'giancarlo_accardo', 'giulia_galati', 'giulia_piccolantonio', 'giuseppe_bava', 'giuseppe_maria_iannone', 'giuseppe_provinzano', 'giuseppina_pagano', 'greta_castiglionesi', 'ilenia_febbi', 'irene_micieli', 'irene_tomassi', 'lamberto_banfi', 'lorenzo_marchionni', 'lucia_tortoreti', 'manuela_consoli', 'marco_bruno', 'marco_innocenti', 'marco_troisi', 'margaret_scolaro', 'margherita_la_grotteria', 'maria_monaco', 'martina_fioravanti_paolucci', 'martina_pontiggia', 'matteo_rovarini', 'maurizio_cilione', 'michela_gentili', 'michele_pellicciari', 'nadia_crivellari', 'nikla_colella', 'pamela_barile', 'paolo_forti', 'roberta_pisano', 'roberto_rasoli', 'salvatore_tripodi', 'selenia_panebianco', 'silvia_poli', 'simone_tumino', 'sina_kian', 'stefania_carriero', 'stefano_menghini', 'stefano_riccardi', 'valentina_lange', 'valeria_canestri', 'valeria_sangalli', 'vanessa_de_martino', 'vittorio_petruzzi', 'flavia_lo_forte', 'rating_base']
+
+sql="""select * from domiciliatario;"""
+cursor = conn.cursor()
+cursor.execute(sql)
+#nind=cursor.fetchall()
+df=pd.DataFrame(cursor.fetchall(),columns=cols)
+
+sql = """select * from v_user where stato=1 order by index"""
+cursor = conn.cursor()
+cursor.execute(sql)
+df=pd.DataFrame(cursor.fetchall(),columns=['ID','User', 'nome',	'Team',	'Qualifica', 'Tariffa', 'stato'])
+
+
+
+
+
+
+
 def check_password():
     """Returns `True` if the user had a correct password."""
     def password_entered():
@@ -83,5 +102,5 @@ if check_password():
     kos,st.session_state["username"]=check_password()
     if st.session_state["username"] not in ['Marco_Troisi', 'Antonio_Schiavone', 'Sina_Kian', 'Stefano_Menghini']:
         st.session_state["aut"] = 'user'
-    else:
-        st.session_state["aut"] = 'sup'
+    #else:
+    #    st.session_state["aut"] = 'sup'
