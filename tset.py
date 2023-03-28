@@ -101,3 +101,5 @@ if check_password():
         st.session_state["aut"] = 'user'
     #else:
     #    st.session_state["aut"] = 'sup'
+
+    st.write(df)
