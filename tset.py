@@ -31,7 +31,7 @@ hide_menu_style= """
           </style>
           """
 
-
+d = date.today()
 engine = create_engine('postgresql+psycopg2://{}:%s@{}/{}'.format(st.secrets["postgres"]['user'],st.secrets["postgres"]['host'],st.secrets["postgres"]['dbname']) % quote_plus(st.secrets["postgres"]['password']))
 st.markdown(hide_menu_style, unsafe_allow_html=True)
 # Initialize connection.
