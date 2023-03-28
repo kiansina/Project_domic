@@ -29,7 +29,12 @@ hide_menu_style= """
           #MainMenu {visibility: hidden; }
           footer {visibility: hidden;}
           </style>
+          <style>
+            thead tr th:first-child {display:none}
+            tbody th {display:none}
+            </style>
           """
+
 
 engine = create_engine('postgresql+psycopg2://{}:%s@{}/{}'.format(st.secrets["postgres"]['user'],st.secrets["postgres"]['host'],st.secrets["postgres"]['dbname']) % quote_plus(st.secrets["postgres"]['password']))
 st.markdown(hide_menu_style, unsafe_allow_html=True)
