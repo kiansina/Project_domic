@@ -77,3 +77,11 @@ def check_password():
     else:
         # Password correct.
         return True , st.session_state["username"]
+
+
+if check_password():
+    kos,st.session_state["username"]=check_password()
+    if st.session_state["username"] not in ['Marco_Troisi', 'Antonio_Schiavone', 'Sina_Kian', 'Stefano_Menghini']:
+        st.session_state["aut"] = 'user'
+    else:
+        st.session_state["aut"] = 'sup'
