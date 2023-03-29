@@ -136,9 +136,10 @@ if check_password():
     "https://media-exp1.licdn.com/dms/image/C560BAQE17_4itIWOLw/company-logo_200_200/0/1570546904891?e=2147483647&v=beta&t=w-App-ZgjSHDlEDDFQeNB7XU2L7QgY2EF-vFj2Il8q8",
      width=150,
      )
+    st.title("Timesheet 📅")
     col1, col2 = st.columns(2)
     with col1:
-        st.title("Timesheet 📅")
+        st.write(dfs)
     with col2:
         st.image(
         "{}".format(duser[duser['User']==st.session_state["username"]]['linkf'].iloc[0]),
