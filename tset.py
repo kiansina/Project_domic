@@ -22,7 +22,7 @@ from plotly.subplots import make_subplots
 import math
 locale.setlocale(locale.LC_ALL, 'it_IT')
 img=Image.open('lo.jfif')
-st.set_page_config(page_title="Dashboard", page_icon=img)
+st.set_page_config(page_title="Domiciliatario", page_icon=img)
 
 hide_menu_style= """
           <style>
@@ -136,7 +136,7 @@ if check_password():
     "https://media-exp1.licdn.com/dms/image/C560BAQE17_4itIWOLw/company-logo_200_200/0/1570546904891?e=2147483647&v=beta&t=w-App-ZgjSHDlEDDFQeNB7XU2L7QgY2EF-vFj2Il8q8",
      width=150,
      )
-    st.title("Domiciliatario 🏫")
+    st.title("Domiciliatario:[red] 🏫")
     col1, col2 = st.columns(2)
     with col1:
         st.write("")
