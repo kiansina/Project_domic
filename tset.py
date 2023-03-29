@@ -134,7 +134,6 @@ def sql_ins():
                 where id={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
             cursor = conn.cursor()
             cursor.execute(sql)
-            st.write(sql)
     st.session_state["Confirm"]=not st.session_state["Confirm"]
 
 if check_password():
@@ -184,4 +183,4 @@ if check_password():
             )
 
     
-st.session_state
+
