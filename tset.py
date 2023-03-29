@@ -141,6 +141,7 @@ if check_password():
     with col1:
         st.write("")
         st.write("")
+        st.write("")
         st.write(dfs)
     with col2:
         st.image(
