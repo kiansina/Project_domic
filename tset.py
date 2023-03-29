@@ -123,6 +123,19 @@ def check_password():
         # Password correct.
         return True , st.session_state["username"]
 
+def sql_ins():
+    st.session_state["Confirm"]=not st.session_state["Confirm"]
+        if st.session_state["Confirm"]==True:
+            dx=pd.DataFrame(e_df)
+            dx=dx.dropna(subset=[st.session_state["username"].lower()])
+            for i in dx.index:
+                sql="""update domiciliatario
+                    set {}={}
+                    where id={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
+                cursor = conn.cursor()
+                cursor.execute(sql)
+                st.write(sql)
+        st.session_state["Confirm"]=not st.session_state["Confirm"]
 
 if check_password():
     kos,st.session_state["username"]=check_password()
@@ -158,18 +171,7 @@ if check_password():
         xx=['domiciliatario', 'rating_base']+[st.session_state["username"].lower()]
         e_df = st.experimental_data_editor(df[xx], num_rows="dynamic")
         if st.button('Confirm'):
-            st.session_state["Confirm"]=not st.session_state["Confirm"]
-            if st.session_state["Confirm"]==True:
-                dx=pd.DataFrame(e_df)
-                dx=dx.dropna(subset=[st.session_state["username"].lower()])
-                for i in dx.index:
-                    sql="""update domiciliatario
-                       set {}={}
-                       where id={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
-                    cursor = conn.cursor()
-                    cursor.execute(sql)
-                    st.write(sql)
-            st.session_state["Confirm"]=not st.session_state["Confirm"]
+            sql_ins()
     elif option=='Extracting Votes':
         if st.button('extract voto'):
             final_file = to_excel3(df,index=True)
