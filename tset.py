@@ -125,17 +125,17 @@ def check_password():
 
 def sql_ins():
     st.session_state["Confirm"]=not st.session_state["Confirm"]
-        if st.session_state["Confirm"]==True:
-            dx=pd.DataFrame(e_df)
-            dx=dx.dropna(subset=[st.session_state["username"].lower()])
-            for i in dx.index:
-                sql="""update domiciliatario
-                    set {}={}
-                    where id={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
-                cursor = conn.cursor()
-                cursor.execute(sql)
-                st.write(sql)
-        st.session_state["Confirm"]=not st.session_state["Confirm"]
+    if st.session_state["Confirm"]==True:
+        dx=pd.DataFrame(e_df)
+        dx=dx.dropna(subset=[st.session_state["username"].lower()])
+        for i in dx.index:
+            sql="""update domiciliatario
+                set {}={}
+                where id={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
+            cursor = conn.cursor()
+            cursor.execute(sql)
+            st.write(sql)
+    st.session_state["Confirm"]=not st.session_state["Confirm"]
 
 if check_password():
     kos,st.session_state["username"]=check_password()
