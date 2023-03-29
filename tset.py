@@ -54,7 +54,9 @@ cursor.execute(sql)
 df=pd.DataFrame(cursor.fetchall(),columns=cols)
 df.set_index('id',inplace=True)
 
-
+@st.cache_data
+def get_data():
+    return []
 
 def to_excel3(df,index=False):
     output = BytesIO()
