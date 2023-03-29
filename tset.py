@@ -149,28 +149,31 @@ if check_password():
          width=150,
          )
     
+    option = st.selectbox(
+    'What do you need?',
+    ('Extracting Votes', 'Voting'))
 
-    
-          
-    xx=['domiciliatario', 'rating_base']+[st.session_state["username"].lower()]
-    e_df = st.experimental_data_editor(df[xx], num_rows="dynamic")
-    if st.button('Confirm'):
-        dx=pd.DataFrame(e_df)
-        dx=dx.dropna(subset=[st.session_state["username"].lower()])
-        dx
-        for i in dx.index:
-            sql="""update domiciliatario
+    if option=='Voting':
+        xx=['domiciliatario', 'rating_base']+[st.session_state["username"].lower()]
+        e_df = st.experimental_data_editor(df[xx], num_rows="dynamic")
+        if st.button('Confirm'):
+            dx=pd.DataFrame(e_df)
+            dx=dx.dropna(subset=[st.session_state["username"].lower()])
+            for i in dx.index:
+                sql="""update domiciliatario
                    set {}={}
                    where id={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
-            cursor = conn.cursor()
-            cursor.execute(sql)
+                cursor = conn.cursor()
+                cursor.execute(sql)
+    elif option=='Extracting Votes':
+        if st.button('extract voto'):
+            final_file = to_excel3(df,index=True)
+            st.download_button(
+            "Press to Download",
+            final_file,
+            "Pivot_UP_{}.xlsx".format(d.strftime("%m_%d_%y")),
+            "text/csv",
+            key='download-excel'
+            )
 
-    if st.button('extract voto'):
-        final_file = to_excel3(df,index=True)
-        st.download_button(
-        "Press to Download",
-        final_file,
-        "Pivot_UP_{}.xlsx".format(d.strftime("%m_%d_%y")),
-        "text/csv",
-        key='download-excel'
-        )
+    
