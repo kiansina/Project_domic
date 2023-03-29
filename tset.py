@@ -86,7 +86,8 @@ cursor = conn.cursor()
 cursor.execute(sql)
 duser=pd.DataFrame(cursor.fetchall(),columns=['ID','User', 'nome',	'Team',	'Qualifica', 'Tariffa', 'stato', 'linkf'])
 
-
+if "Confirm" not in st.session_state:
+    st.session_state["Confirm"] = False
 
 def check_password():
     """Returns `True` if the user had a correct password."""
@@ -165,6 +166,7 @@ if check_password():
                    where id={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
                 cursor = conn.cursor()
                 cursor.execute(sql)
+            st.session_state["Confirm"]=not st.session_state["Confirm"]
     elif option=='Extracting Votes':
         if st.button('extract voto'):
             final_file = to_excel3(df,index=True)
