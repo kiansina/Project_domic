@@ -136,11 +136,16 @@ if check_password():
     "https://media-exp1.licdn.com/dms/image/C560BAQE17_4itIWOLw/company-logo_200_200/0/1570546904891?e=2147483647&v=beta&t=w-App-ZgjSHDlEDDFQeNB7XU2L7QgY2EF-vFj2Il8q8",
      width=150,
      )
-    st.title("Timesheet 📅")
-    st.image(
-    "{}".format(duser[duser['User']==st.session_state["username"]]['linkf'].iloc[0]),
-     width=150,
-     )
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.title("Timesheet 📅")
+    with col2:
+          st.write("")
+    with col3:
+        st.image(
+        "{}".format(duser[duser['User']==st.session_state["username"]]['linkf'].iloc[0]),
+         width=150,
+         )
 
     
           
