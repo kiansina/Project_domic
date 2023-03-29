@@ -166,6 +166,7 @@ if check_password():
                    where id={}""".format(st.session_state["username"].lower(),dx[st.session_state["username"].lower()].loc[i],i)
                 cursor = conn.cursor()
                 cursor.execute(sql)
+                st.write(sql)
             st.session_state["Confirm"]=not st.session_state["Confirm"]
     elif option=='Extracting Votes':
         if st.button('extract voto'):
@@ -179,3 +180,4 @@ if check_password():
             )
 
     
+st.session_state()
