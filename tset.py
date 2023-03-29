@@ -144,7 +144,7 @@ if check_password():
     with col3:
         st.image(
         "{}".format(duser[duser['User']==st.session_state["username"]]['linkf'].iloc[0]),
-         width=120,
+         width=100,
          )
 
     
