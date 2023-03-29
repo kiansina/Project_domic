@@ -81,7 +81,10 @@ def to_excel3(df,index=False):
     processed_data = output.getvalue()
     return processed_data
 
-
+sql = """select * from v_user where stato=1 order by index"""
+cursor = conn.cursor()
+cursor.execute(sql)
+df=pd.DataFrame(cursor.fetchall(),columns=['ID','User', 'nome',	'Team',	'Qualifica', 'Tariffa', 'stato', 'linkf'])
 
 
 
