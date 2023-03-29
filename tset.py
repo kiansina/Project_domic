@@ -124,6 +124,15 @@ if check_password():
         st.session_state["aut"] = 'user'
     #else:
     #    st.session_state["aut"] = 'sup'
+    DFST=get_data()
+    dfs=df[df['User']==st.session_state["username"]][df.columns[1:-2]]
+    st.image(
+    #"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/325/floppy-disk_1f4be.png",
+    "https://media-exp1.licdn.com/dms/image/C560BAQE17_4itIWOLw/company-logo_200_200/0/1570546904891?e=2147483647&v=beta&t=w-App-ZgjSHDlEDDFQeNB7XU2L7QgY2EF-vFj2Il8q8",
+     width=150,
+     )
+
+     st.title("Timesheet 📅")
 
     
           
