@@ -139,6 +139,8 @@ if check_password():
     st.title("Timesheet 📅")
     col1, col2 = st.columns(2)
     with col1:
+        st.write("")
+        st.write("")
         st.write(dfs)
     with col2:
         st.image(
