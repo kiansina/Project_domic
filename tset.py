@@ -138,7 +138,7 @@ if check_password():
      )
     st.title("Timesheet 📅")
     st.image(
-    "{}".format(duser[duser['User']==st.session_state["username"]][linkf]),
+    "{}".format(duser[duser['User']==st.session_state["username"]]['linkf']),
      width=150,
      )
 
