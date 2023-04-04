@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import psycopg2
@@ -53,7 +54,7 @@ cursor.execute(sql)
 #nind=cursor.fetchall()
 df=pd.DataFrame(cursor.fetchall(),columns=cols)
 df.set_index('id',inplace=True)
-
+df['mean'] = df[cols[1:-1]].mean(axis=1)
 @st.cache_data
 def get_data():
     return []
@@ -161,14 +162,14 @@ if check_password():
         "{}".format(duser[duser['User']==st.session_state["username"]]['linkf'].iloc[0]),
          width=150,
          )
-        
-    
+
+
     option = st.selectbox(
     'What do you need?',
     ('Extracting Votes', 'Voting'))
 
     if option=='Voting':
-        xx=['domiciliatario', 'rating_base']+[st.session_state["username"].lower()]
+        xx=['domiciliatario', 'rating_base','mean']+[st.session_state["username"].lower()]
         e_df = st.experimental_data_editor(df[xx], num_rows="dynamic")
         if st.button('Confirm'):
             sql_ins()
@@ -182,6 +183,3 @@ if check_password():
             "text/csv",
             key='download-excel'
             )
-
-    
-
