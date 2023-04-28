@@ -56,7 +56,7 @@ cursor.execute(sql)
 #nind=cursor.fetchall()
 df=pd.DataFrame(cursor.fetchall(),columns=cols)
 df.set_index('id',inplace=True)
-#df['mean'] = df[cols[1:-1]].mean(axis=1)
+df['mean'] = df[cols[1:-1]].mean(axis=1)
 
 sql="""select * from anagrafia;"""
 cursor = conn.cursor()
