@@ -190,7 +190,7 @@ if check_password():
             st.download_button(
             "Press to Download",
             final_file,
-            "vote_UP_{}.xlsx".format(d.strftime("%m_%d_%y")),
+            "vote_{}.xlsx".format(d.strftime("%m_%d_%y")),
             "text/csv",
             key='download-excel'
             )
@@ -200,7 +200,7 @@ if check_password():
             st.download_button(
             "Press to Download",
             final_file,
-            "Anagrafia_UP_{}.xlsx".format(d.strftime("%m_%d_%y")),
+            "Anagrafia_{}.xlsx".format(d.strftime("%m_%d_%y")),
             "text/csv",
             key='download-excel'
             )
