@@ -58,8 +58,7 @@ df=pd.DataFrame(cursor.fetchall(),columns=cols)
 df.set_index('id',inplace=True)
 #df[df.columns[1:]]= df[df.columns[1:]].astype(float)
 df['mean'] = df[cols[2:-1]].mean(axis=1)
-st.write(df)
-st.write(df.dtypes)
+
 
 sql="""select * from anagrafia;"""
 cursor = conn.cursor()
