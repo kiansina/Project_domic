@@ -48,6 +48,8 @@ conn.autocommit = True
 
 cols=['id', 'domiciliatario','alessandro_marcadelli', 'alice_giubbi', 'andrea_manduchi', 'andrea_siena', 'andrea_unfer', 'angela_romano', 'anna_pettenati', 'antonio_scalera', 'antonio_schiavone', 'antonio_toscano', 'barbara_zagaria', 'benedetta_cinti', 'benedetta_paniconi', 'chiara_butta', 'danilo_brandi', 'dario_mami', 'davide_sarina', 'diandra_sciarra', 'edoardo_salmaso', 'egzona_baxhak', 'eleonora_gioia', 'elisa_albanese', 'ester_famao', 'eva_baldassarre', 'federica_cirelli', 'federica_colombo', 'federica_de_carlo', 'federica_morandotti', 'filippo_maria_traina', 'filippo_porta', 'gaia_prudente', 'giangiacomo_ciceri', 'gianmarco_marani', 'ludovica_ferri', 'giancarlo_accardo', 'giulia_galati', 'giulia_piccolantonio', 'giuseppe_bava', 'giuseppe_maria_iannone', 'giuseppe_provinzano', 'giuseppina_pagano', 'greta_castiglionesi', 'ilenia_febbi', 'irene_micieli', 'irene_tomassi', 'lamberto_banfi', 'lorenzo_marchionni', 'lucia_tortoreti', 'manuela_consoli', 'marco_bruno', 'marco_innocenti', 'marco_troisi', 'margaret_scolaro', 'margherita_la_grotteria', 'maria_monaco', 'martina_fioravanti_paolucci', 'martina_pontiggia', 'matteo_rovarini', 'maurizio_cilione', 'michela_gentili', 'michele_pellicciari', 'nadia_crivellari', 'nikla_colella', 'pamela_barile', 'paolo_forti', 'roberta_pisano', 'roberto_rasoli', 'salvatore_tripodi', 'selenia_panebianco', 'silvia_poli', 'simone_tumino', 'sina_kian', 'stefania_carriero', 'stefano_menghini', 'stefano_riccardi', 'valentina_lange', 'valeria_canestri', 'valeria_sangalli', 'vanessa_de_martino', 'vittorio_petruzzi', 'flavia_lo_forte', 'rating_base']
 
+
+cols2=['id', 'indirizzo', 'cap', 'email','email2','email3', 'tel', 'tel2', 'cell', 'cell2', 'fax', 'cf', 'piva', 'pec','iban', 'fori']
 sql="""select * from domiciliatario;"""
 cursor = conn.cursor()
 cursor.execute(sql)
@@ -55,6 +57,16 @@ cursor.execute(sql)
 df=pd.DataFrame(cursor.fetchall(),columns=cols)
 df.set_index('id',inplace=True)
 df['mean'] = df[cols[1:-1]].mean(axis=1)
+
+sql="""select * from anagrafia;"""
+cursor = conn.cursor()
+cursor.execute(sql)
+#nind=cursor.fetchall()
+dg=pd.DataFrame(cursor.fetchall(),columns=cols2)
+dg.set_index('id',inplace=True)
+
+
+
 @st.cache_data
 def get_data():
     return []
@@ -89,6 +101,8 @@ duser=pd.DataFrame(cursor.fetchall(),columns=['ID','User', 'nome',	'Team',	'Qual
 
 if "Confirm" not in st.session_state:
     st.session_state["Confirm"] = False
+
+
 
 def check_password():
     """Returns `True` if the user had a correct password."""
@@ -162,12 +176,9 @@ if check_password():
         "{}".format(duser[duser['User']==st.session_state["username"]]['linkf'].iloc[0]),
          width=150,
          )
-
-
     option = st.selectbox(
     'What do you need?',
-    ('Extracting Votes', 'Voting'))
-
+    ('Extracting Votes', 'Voting', 'Anagrafia'))
     if option=='Voting':
         xx=['domiciliatario', 'rating_base','mean']+[st.session_state["username"].lower()]
         e_df = st.experimental_data_editor(df[xx], num_rows="dynamic")
@@ -179,7 +190,17 @@ if check_password():
             st.download_button(
             "Press to Download",
             final_file,
-            "Pivot_UP_{}.xlsx".format(d.strftime("%m_%d_%y")),
+            "vote_UP_{}.xlsx".format(d.strftime("%m_%d_%y")),
+            "text/csv",
+            key='download-excel'
+            )
+    elif option=='Anagrafia':
+        if st.button('Extract Anagrafia'):
+            final_file = to_excel3(dg,index=True)
+            st.download_button(
+            "Press to Download",
+            final_file,
+            "Anagrafia_UP_{}.xlsx".format(d.strftime("%m_%d_%y")),
             "text/csv",
             key='download-excel'
             )
