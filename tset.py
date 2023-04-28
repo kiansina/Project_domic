@@ -50,7 +50,7 @@ cols=['id', 'domiciliatario','alessandro_marcadelli', 'alice_giubbi', 'andrea_ma
 
 
 cols2=['id', 'indirizzo', 'cap', 'email','email2','email3', 'tel', 'tel2', 'cell', 'cell2', 'fax', 'cf', 'piva', 'pec','iban', 'fori']
-sql="""select * from domiciliatario;"""
+sql="""select * from domiciliatario order by id;"""
 cursor = conn.cursor()
 cursor.execute(sql)
 #nind=cursor.fetchall()
